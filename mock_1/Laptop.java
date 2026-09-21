@@ -11,7 +11,7 @@ public class Laptop extends Equipment {
   @Override
   public int rentalFee(int hours) {
     if (hours <= this.hourLimit) {
-      return hours * this.hourLimit;
+      return hours * this.initialCost;
     }
 
     int remainingHours = hours - this.hourLimit;
