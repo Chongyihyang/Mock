@@ -4,11 +4,12 @@ public class JustRide extends RideService {
   
   @Override
   public int computeFare(Request request) {
+    int ret = this.rate * request.getDistance();
     if (request.requiresSurcharge()) {
-      return this.rate * request.getDistance() + RideService.SURCHARGE_FEE; 
+      ret += RideService.SURCHARGE_FEE; 
     }
 
-    return this.rate;
+    return ret;
   }
 
   @Override

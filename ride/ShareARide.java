@@ -4,11 +4,12 @@ public class ShareARide extends RideService {
   
   @Override
   public int computeFare(Request request) {
+    int ret = this.rate * request.getDistance();
     if (request.requiresSurcharge()) {
-      return request.getPerPersonAmt(this.rate * request.getDistance() + RideService.SURCHARGE_FEE); 
+      ret += RideService.SURCHARGE_FEE;
     }
 
-    return request.getPerPersonAmt(this.rate);
+    return request.getPerPersonAmt(ret);
   }
 
   @Override

@@ -5,10 +5,11 @@ public class Booking implements Comparable<Booking> {
   private final Request request;
 
   public Booking(Car car, RideService service, Request request) throws IllegalArgumentException {
+    String msg = request + " does not provide " + service + " service.";
     if ((car instanceof Cab) && (service instanceof ShareARide)) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(msg);
     } else if ((car instanceof PrivateCar) && (service instanceof TakeACab)) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException(msg);
     }
 
     this.car = car;
@@ -31,6 +32,6 @@ public class Booking implements Comparable<Booking> {
       return time;
     }
 
-    return -1;
+    return 0;
   }
 }

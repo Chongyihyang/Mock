@@ -9,6 +9,6 @@ public class TakeACab extends RideService {
 
   @Override
   public String toString() {
-    return "RideService";
+    return "TakeACab";
   }
 }
