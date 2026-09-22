@@ -25,4 +25,8 @@ public class Pass {
     this.availableAdmissionsLeft -= 1;
   }
 
+  @Override
+  public String toString() {
+    return this.identity;
+  }
 }

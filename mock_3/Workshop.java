@@ -21,11 +21,12 @@ public abstract class Workshop {
 
   }
 
-  public void join() throws FullWorkshopException {
+  public String join(Pass pass) throws FullWorkshopException {
     if (this.capacity <= this.currentOccupancy) {
       throw new FullWorkshopException("0");
     }
     this.currentOccupancy += 1;
+    return pass.toString();
   }
 
 }
