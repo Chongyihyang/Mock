@@ -5,7 +5,7 @@ public class Booking implements Comparable<Booking> {
   private final Request request;
 
   public Booking(Car car, RideService service, Request request) throws IllegalArgumentException {
-    String msg = car + " does not provide " + service + " service.";
+    String msg = car + " does not provide the " + service + " service.";
     if ((car instanceof Cab) && (service instanceof ShareARide)) {
       throw new IllegalArgumentException(msg);
     } else if ((car instanceof PrivateCar) && (service instanceof TakeACab)) {
