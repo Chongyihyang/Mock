@@ -40,6 +40,7 @@ public class TaskList {
     tasks = new Array<>(count);
     for (int i = 0; i < count; i++) {
       this.createTask(input.nextLine(), i); 
+      this.loaded += 1;
     }
   }
 
@@ -78,7 +79,7 @@ public class TaskList {
 
   public void printTaskDetails() {
     for (int i = 0; i < this.loaded; i++) {
-      System.out.println(this.getTask(i).getDesciption());
+      System.out.println(this.details(i));
     }
   }
 
@@ -94,7 +95,7 @@ public class TaskList {
     for (int i = 0; i < this.loaded; i++) {
       Task task_ = this.getTask(i);
       if (task_.dueToday()) {
-        System.out.println(task_.getDesciption());
+        System.out.println(this.details(i));
       }
     }
   }
@@ -102,7 +103,7 @@ public class TaskList {
   public void remindAll() {
     for (int i = 0; i < this.loaded; i++) {
       Task task_ = this.getTask(i);
-      if (task_.sendReminder() != null) {
+      if (task_.sendReminder() != null && !task_.isDone()) {
         System.out.println(task_.sendReminder());
       }
     }

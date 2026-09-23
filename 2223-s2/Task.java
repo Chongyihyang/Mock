@@ -15,11 +15,11 @@ public abstract class Task {
   public String toString() {
     String res = this.description;
     if (this.deadline != null) {
-      res += " | " + this.deadline;
+      res += " | Due in " + this.deadline + " days";
     }
 
     if (this.assignee != null) {
-      res += " | " + this.assignee;
+      res += " | Assigned to " + this.assignee;
     }
 
     return res;
