@@ -1,9 +1,7 @@
 public class Birthday extends Event {
 
   public Birthday(String person) {
-    String res = "Birthday (" + person + ")";
-    System.out.println(res);
-    super(res);
+    super("Birthday (" + person + ")");
   }
 
   @Override
