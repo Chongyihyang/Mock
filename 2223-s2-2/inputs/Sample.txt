@@ -1,0 +1,6 @@
+5
+1,CS2030S,12,14
+0,Ah Huat
+2,Discuss Project,11,12,Ahmad
+1,MA2101,8,10
+2,Breakfast,10,11,Devi
