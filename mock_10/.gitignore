@@ -1,0 +1,5 @@
+*.class
+.build.*/
+.snapshot-*
+task1.previous.*/
+task2.previous.*/

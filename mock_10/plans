@@ -1,0 +1,38 @@
+classes:
+
+ParcelDesk
++ String addParcel(String, days)
++ String allParcels()
++ String overdueParcels() (return below zero)
++ Stirng extend(int)
++ String addChilled(name, days)
++ String addLocker(name, days, code)
++ String collect(index)
++ int feesCollected()
+
+
+Parcel
+- String name
+- int daysLeft
++ toString()
++ isOverdue()
++ collect()
+add -collected boolean
+
+Chilled
+add chilled to toString
+can only extend once
+4 * number of overdue days
+
+Locker
+cannot extend
+pay flat $7
+add [locker CODE]
+
+
+rules:
+At most 2 extension per parcel
+Add 3 days
+Overdue <0 cannot extend
+0 index
+
