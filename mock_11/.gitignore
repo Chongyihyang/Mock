@@ -1,0 +1,6 @@
+*.class
+.session
+.task2-unlocked
+.snapshot-*
+task1.previous.*/
+task2.previous.*/

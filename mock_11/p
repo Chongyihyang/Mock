@@ -1,0 +1,31 @@
+Job <Abstract>
+- String name
+
+
+
+Scan extends Job
+- int energy
+- boolean executed
++ int recharge()
++ int energyLeft()
++ int energyUsed()
++ String toString():
++ boolean hasExecuted()
+<name> {next <N> energy} [<state>]
+where state is pending or done
+
+
+RoverMission
+- Seq<Job> seq
+
++ __init__ (int capacity, int energy)
++ addScan(String name, int cost)
+"Added: " + <status>
++ status() String
+returns all registered jobs in order
++ pending() String
+only pending jobs
++ String execute(int index)
++ int recharge()
++ int energyLeft()
++ int energyUsed()
