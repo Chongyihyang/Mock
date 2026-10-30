@@ -1,0 +1,9 @@
+*.class
+.*.sw?
+.*.err
+.*.out
+*.un~
+.DS_Store
+.test-build.*/
+.task*-snapshot.*/
+/task2.md
