@@ -1,0 +1,11 @@
+/open Valuable.java
+/open Book.java
+/open BookShop.java
+/open Books.jsh
+/open DiscountedBook.java
+/open ShopComparator.java
+/open Q4.java
+/open Q5.java
+/open Q6.java
+/open Q7.java
+/open Q8.java

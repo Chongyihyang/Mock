@@ -1,0 +1,1 @@
+class Invalid { BookShop<String> s=new BookShop<>(); }

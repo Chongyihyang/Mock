@@ -1,0 +1,1 @@
+class Invalid { FruitStall<Apple> s=Q4.mergeStalls(new FruitStall<Apple>(),new FruitStall<Fruit>()); }

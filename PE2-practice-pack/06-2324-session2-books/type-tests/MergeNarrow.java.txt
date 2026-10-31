@@ -1,0 +1,1 @@
+class Invalid { BookShop<Classic> s=Q4.mergeShops(new BookShop<Classic>(),new BookShop<Book>()); }
