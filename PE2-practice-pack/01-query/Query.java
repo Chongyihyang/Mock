@@ -32,7 +32,9 @@ public class Query {
         x
         .getValue()
         .stream()
-        .map(y -> x.getKey() + ": " + salesTable.get(y))
+        .map(y -> salesTable.get(y))
+        .filter(z -> z != null)
+        .map(z -> x.getKey() + ": " + z)
       );
   }
 
