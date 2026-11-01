@@ -2,9 +2,39 @@ import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
 public class Main {
- public static Stream<Point> pointStream(Point point, Function<Point, Point> f) { throw new UnsupportedOperationException("TODO: pointStream"); }
- public static Stream<Point> generateGrid(Point point, int n) { throw new UnsupportedOperationException("TODO: generateGrid"); }
- public static Stream<Circle> concentricCircles(Circle circle, Function<Double, Double> f) { throw new UnsupportedOperationException("TODO: concentricCircles"); }
- public static Stream<Point> pointStreamFromCircle(Stream<Circle> circles) { throw new UnsupportedOperationException("TODO: pointStreamFromCircle"); }
- public static double estimatePi(Circle circle, Supplier<RandomPoint> supplier, int k) { throw new UnsupportedOperationException("TODO: estimatePi"); }
+
+  public static Stream<Point> pointStream(Point point, Function<Point, Point> f) {
+    return Stream.iterate(point, p -> f.apply(p));
+  }
+
+  public static Stream<Point> generateGrid(Point point, int n) {
+    return pointStream(point, p -> new Point(p.getX() + 1, p.getY()))
+      .limit(n)
+      .flatMap(r -> 
+          pointStream(r, s -> new Point(s.getX(), s.getY() + 1)).limit(n)
+          );
+  }
+
+  public static Stream<Circle> concentricCircles(Circle circle, Function<Double, Double> f) {
+    return Stream
+      .iterate(circle, c -> 
+          new Circle(c.getCenter(), f.apply(c.getRadius()))
+          );
+  }
+
+  public static Stream<Point> pointStreamFromCircle(Stream<Circle> circles) {
+    return circles.map(c -> c.getCenter());
+  }
+
+  public static double estimatePi(Circle circle, Supplier<RandomPoint> supplier, int k) {
+    return Stream
+      .generate(supplier)
+      .limit(k)
+      .filter(x -> circle.contains(x))
+      .count() * 4 / (double) k;
+  }
+
+  // 1. generate a stream of random points
+  // 2. use the filter method to check if point is in circle
+  // 3. count number of elements, mul 4, divide it by k, 
 }
