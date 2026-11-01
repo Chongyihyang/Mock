@@ -34,7 +34,4 @@ public class Main {
       .count() * 4 / (double) k;
   }
 
-  // 1. generate a stream of random points
-  // 2. use the filter method to check if point is in circle
-  // 3. count number of elements, mul 4, divide it by k, 
 }

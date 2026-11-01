@@ -252,24 +252,24 @@ jshell> Either.<String, Boolean>left("no change").filterOrElse(x -> x ==
 true, x -> "");
 $.. ==> Left[no change]
 jshell> Either.<String, Boolean>right(true).filterOrElse(x -> x == true,
-        x -> "is false");
-        $.. ==> Right[true]
-        jshell> Either.<String, Boolean>right(false).filterOrElse(x -> x == true,
-        x -> "is false");
-        $.. ==> Left[is false]
+x -> "is false");
+$.. ==> Right[true]
+jshell> Either.<String, Boolean>right(false).filterOrElse(x -> x == true,
+x -> "is false");
+$.. ==> Left[is false]
 
-        jshell> Transformer<Object, Exception> toException = o -> new
-        IllegalStateException(o + " is illegal");
-        jshell> BooleanCondition<Number> isPositive = n -> n.intValue() > 0;
-        jshell> Either.<Throwable, Integer>left(new
-        IllegalStateException()).filterOrElse(isPositive, toException);
-        $.. ==> Left[java.lang.IllegalStateException]
-        jshell> Either.<Throwable, Integer>right(0).filterOrElse(isPositive,
-        toException);
-        $.. ==> Left[java.lang.IllegalStateException: 0 is illegal]
-        jshell> Either.<Throwable, Integer>right(8).filterOrElse(isPositive,
-        toException);
-        $.. ==> Right[8]
+jshell> Transformer<Object, Exception> toException = o -> new
+IllegalStateException(o + " is illegal");
+jshell> BooleanCondition<Number> isPositive = n -> n.intValue() > 0;
+jshell> Either.<Throwable, Integer>left(new
+IllegalStateException()).filterOrElse(isPositive, toException);
+$.. ==> Left[java.lang.IllegalStateException]
+jshell> Either.<Throwable, Integer>right(0).filterOrElse(isPositive,
+toException);
+$.. ==> Left[java.lang.IllegalStateException: 0 is illegal]
+jshell> Either.<Throwable, Integer>right(8).filterOrElse(isPositive,
+toException);
+$.. ==> Right[8]
 
 
 You can also test your code with Test2.java :
