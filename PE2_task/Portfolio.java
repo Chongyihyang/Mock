@@ -1,6 +1,7 @@
 // @author:
 
 import cs2030s.fp.InfiniteList;
+import cs2030s.fp.Maybe;
 import java.util.List;
 
 public class Portfolio<T extends Stock> {
@@ -11,20 +12,17 @@ public class Portfolio<T extends Stock> {
   }
 
   public void addStock(T stock) {
-    List<T> tmp = this.stocks.toList();
-    tmp.add(stock);
-    this.stocks = InfiniteList.fromList(tmp);
+    this.stocks = InfiniteList
+      .of(
+        this.stocks, 
+        InfiniteList.of(stock))
+      .flatMap(x -> x);
   }
 
   public void removeStock(T stock) {
-    List<T> tmp = this.stocks.toList();
-    for (int i = tmp.size() - 1; i > 0; i -= 1) {
-      Stock stonk = tmp.get(i);
-      if (stonk.getSymbol().equals(stock.getSymbol())) {
-        tmp.remove(i);
-      }
-    }
-    this.stocks = InfiniteList.fromList(tmp);
+    this.stocks = this
+      .stocks
+      .filter(x -> !x.getSymbol().equals(stock.getSymbol()));
   }
 
   public InfiniteList<T> getStocks() {
@@ -32,13 +30,7 @@ public class Portfolio<T extends Stock> {
   }
 
   public double performAllActions() {
-    List<T> tmp = this.stocks.toList();
-    double res = 0.0;
-    for (int i = 0; i < tmp.size(); i += 1) {
-      Stock stonk = tmp.get(i);
-      res += stonk.performStockAction();
-    }
-    return res;
+    return this.stocks.reduce(0.0, (x, y) -> x + y.performStockAction());
   }
 
   @Override

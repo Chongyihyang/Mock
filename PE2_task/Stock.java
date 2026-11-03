@@ -1,9 +1,9 @@
 // @author:
 
 public class Stock {
-  private String symbol;
-  private double price;
-  private StockAction<Double> action;
+  private final String symbol;
+  private final double price;
+  private final StockAction<Double> action;
 
   public Stock(String symbol, double price, StockAction<Double> action) {
     this.symbol = symbol;
@@ -28,16 +28,11 @@ public class Stock {
   }
 
   public Stock changePrice(PriceChange event) {
-    Stock stonk = event.apply(this);
-    this.symbol = stonk.symbol;
-    this.price = stonk.price;
-    this.action = stonk.action;
-    return this;
+    return event.apply(new Stock(this.symbol, this.price, this.action));
   }
 
   public Stock changeStockAction(StockAction<Double> action) {
-    this.action = action;
-    return this;
+    return new Stock(this.symbol, this.price, action);
   }
 
   @Override
