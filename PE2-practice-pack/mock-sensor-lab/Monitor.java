@@ -24,8 +24,7 @@ public class Monitor {
           x
           .getValues()
           .stream()
-          .filter(y -> y > threshold)
-          .count() != 0)
+          .anyMatch(y -> y > threshold))
       .map(x -> 
           x.getName())
       .toList();
