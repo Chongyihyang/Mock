@@ -22,7 +22,7 @@ public final class Calibration {
       .some(batch
           .getReadings()
           .stream()
-          .map(x -> (Integer) this.correction.transform(x)))
+          .<Integer>map(x -> this.correction.transform(x)))
       .map(a -> new Batch(batch.getName(), a.toList()))
       .filter(b -> !b
           .getReadings()

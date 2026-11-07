@@ -5,27 +5,78 @@ import java.util.List;
 import java.util.Comparator;
 import cs2030s.fp.Maybe;
 /** Imperative starter: preserve behavior while refactoring for Task 2. */
+
+
 public class Bank {
+
  private final Map<String,Account> entries;
- public Bank(List<Account> initial) { entries=new TreeMap<>();initial.forEach(x->entries.put(x.getId(),x)); }
- public Account findAccount(String id) { return entries.get(id); }
- public void deposit(String id,double amount) { Account a=findAccount(id);if(a!=null) { a.deposit(amount); } }
- public void withdraw(String id,double amount) { Account a=findAccount(id);if(a!=null) { a.withdraw(amount); } }
- public void closeAccount(String id) { Account a=findAccount(id);if(a!=null) { a.close(); } }
- public double totalMoneyInBank() { double sum=0;for(Account a:entries.values()) { if(!a.isClosed()) { sum+=a.getBalance(); } }return sum; }
+
+ public Bank(List<Account> initial) { 
+   entries = new TreeMap<>();
+   initial.stream().toList().forEach(x->entries.put(x.getId(),x)); 
+ }
+
+ public Account findAccount(String id) { 
+   return entries.get(id); 
+ }
+
+ public void deposit(String id,double amount) { 
+   Maybe.of(findAccount(id)).map(x -> x.deposit(amount));
+ }
+
+ public void withdraw(String id,double amount) { 
+   Maybe.of(findAccount(id)).map(x -> x.withdraw(amount));
+ }
+
+ public void closeAccount(String id) { 
+   Maybe.of(findAccount(id)).map(x -> x.close());
+ }
+
+ public double totalMoneyInBank() { 
+   return this.entries
+     .values()
+     .stream()
+     .filter(a -> !a.isClosed())
+     .reduce(
+         new Account("", 0, List.of()), 
+         (x, y) -> y.combine(x))
+     .getBalance();
+ }
+
  public String allAccounts() {
-  List<Account> all=new ArrayList<>(entries.values());
-  
-  String result="";for(Account a:all) { result+=a+"\n"; }return result;
+  return this.entries
+    .values()
+    .stream()
+    .map(x -> x.toString())
+    .reduce("", (x, y) -> x + "\n" + y);
  }
+
  public void transfer(String from,String to,double amount) {
-  Account a=findAccount(from);Account b=findAccount(to);
-  if(a==null || b==null) {return;} if(a.isClosed() || b.isClosed() || a.getBalance()<=0) {return;} a.transferTo(b,amount);
+  Maybe
+    .of(findAccount(from))
+    .filter(a -> !a.isClosed())
+    .filter(a -> a.getBalance() > 0)
+    .map(a ->
+        Maybe
+        .of(findAccount(to))
+        .filter(b -> !b.isClosed())
+        .map(b -> a.transferTo(b, amount)));
  }
+
  public void combineBankAccount(String from,String to) {
-  Account a=findAccount(from);Account b=findAccount(to);
-  if(a==null || b==null) {return;} if(!a.isClosed() || b.isClosed()) {return;} b.combine(a);entries.remove(from);
+  Maybe
+    .of(findAccount(from))
+    .filter(a -> !a.isClosed())
+    .map(a ->
+        Maybe
+        .of(findAccount(to))
+        .filter(b -> !b.isClosed())
+        .map(b -> b.combine(a))
+        .map(_ -> this.entries.remove(from)));
  }
+
  public boolean equals(Object o) { return o instanceof Bank && entries.equals(((Bank)o).entries); }
+
  public int hashCode() { return entries.hashCode(); }
+
 }

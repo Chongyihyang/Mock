@@ -1,3 +1,5 @@
+import cs2030s.fp.*;
+
 public class Test3 {
  public static void main(String[] args) throws Throwable {
 Bank m=new Bank(java.util.List.of(new Account("a",10,java.util.List.of(new Customer("A","B"))),new Account("b",-3,java.util.List.of(new Customer("C","D")))));
